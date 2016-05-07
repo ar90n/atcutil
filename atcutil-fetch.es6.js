@@ -32,18 +32,18 @@ contests.forEach( contest => {
                 fs.mkdir( path.join( contest, dir_name ), err => {
                     const task_page_url = get_url(contest, task_path);
                     client.fetch( task_page_url, (err, $, res ) => {
-                        $('.part section').each( function( idx, el ) {
-                            const part_title   = $($(el).children().get(0)).text();
-                            const part_content = $($(el).children().get(1)).text();
+                        $('section').each( function( idx, el ) {
+                            const section_title   = $($(el).children().get(0)).text().trim();
+                            const section_content = $($(el).children().get(1)).text().trim();
 
-                            const input_match  = /入力例 (\d)/.exec( part_title );
-                            const output_match = /出力例 (\d)/.exec( part_title );
-                            const part_file_name = input_match  ? `in_${input_match[1]}.txt`:
+                            const input_match  = /入力例\s*(\d)/.exec( section_title );
+                            const output_match = /出力例\s*(\d)/.exec( section_title );
+                            const section_file_name = input_match  ? `in_${input_match[1]}.txt`:
                                                    output_match ? `out_${output_match[1]}.txt`:
                                                    null;
-                            if( part_file_name )
+                            if( section_file_name )
                             {
-                                fs.writeFile( path.join( contest, dir_name, part_file_name ), part_content, err => {
+                                fs.writeFile( path.join( contest, dir_name, section_file_name ), section_content, err => {
                                     if(err)
                                     {
                                         console.log( err );
