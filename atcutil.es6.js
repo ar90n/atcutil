@@ -7,5 +7,5 @@ program
     .version(packagejson.version)
     .command('fetch [contest]', 'featch contest')
     .command('submit [file]', 'submit file')
-    .command('test', 'test')
+    .command('test [exec]', 'test execution file')
     .parse(process.argv);
