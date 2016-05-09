@@ -5,6 +5,8 @@ import path from 'path'
 import client from 'cheerio-httpcli'
 import program from 'commander'
 
+const return_code = '\n';
+
 program
     .parse(process.argv);
 
@@ -33,8 +35,12 @@ contests.forEach( contest => {
                     const task_page_url = get_url(contest, task_path);
                     client.fetch( task_page_url, (err, $, res ) => {
                         $('section').each( function( idx, el ) {
-                            const section_title   = $($(el).children().get(0)).text().trim();
-                            const section_content = $($(el).children().get(1)).text().trim();
+                            const section_title   = $($(el).children().get(0)).text()
+                                                                              .trim();
+                            const section_content = $($(el).children().get(1)).text()
+                                                                              .trimLeft()
+                                                                              .replace(/\r\n/g,'\n')
+                                                                              .replace(/\n/g,return_code);
 
                             const input_match  = /入力例\s*(\d)/.exec( section_title );
                             const output_match = /出力例\s*(\d)/.exec( section_title );
