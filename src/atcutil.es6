@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import packagejson from './package.json'
+import packagejson from '../package.json'
 import program from 'commander'
 
 program

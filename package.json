@@ -6,6 +6,7 @@
     "atcutil": "./bin/atcutil.js"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "build": "babel src -x .es6 -d bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
