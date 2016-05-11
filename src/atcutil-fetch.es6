@@ -5,6 +5,8 @@ import path from 'path'
 import client from 'cheerio-httpcli'
 import program from 'commander'
 
+import common_util from './common_util.js'
+
 const return_code = '\n';
 
 program
@@ -17,14 +19,9 @@ if( !contests.length )
     process.exit(1);
 }
 
-function get_url( contest, path )
-{
-    return 'http://' + contest + '.contest.atcoder.jp/' + path;
-}
-
 contests.forEach( contest => {
     fs.mkdir( contest, err => {
-        client.fetch( get_url(contest, 'assignments'), ( err, $, res ) => {
+        client.fetch( common_util.get_url(contest, 'assignments'), ( err, $, res ) => {
             $('tbody tr').each( function( idx, el ) {
                 const linkwrappers = $(el).find('.linkwrapper');
                 const task_index = $(linkwrappers.get(0)).text();
@@ -32,7 +29,7 @@ contests.forEach( contest => {
                 const task_path  = $(linkwrappers.get(1)).attr('href');
                 const dir_name = task_index + '_' + task_name.replace(/\//g, '-').replace(/\s/g,'_');
                 fs.mkdir( path.join( contest, dir_name ), err => {
-                    const task_page_url = get_url(contest, task_path);
+                    const task_page_url = common_util.get_url(contest, task_path);
                     client.fetch( task_page_url, (err, $, res ) => {
                         $('section').each( function( idx, el ) {
                             const section_title   = $($(el).children().get(0)).text()

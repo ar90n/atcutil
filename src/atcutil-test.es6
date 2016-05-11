@@ -6,6 +6,8 @@ import path from 'path'
 import child_process from 'child_process'
 import program from 'commander'
 
+import common_util from './common_util.js'
+
 program
     .option('-d, --directory [directory]','Set working directory')
     .parse(process.argv);

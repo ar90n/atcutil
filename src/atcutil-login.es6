@@ -7,6 +7,8 @@ import client from 'cheerio-httpcli'
 import program from 'commander'
 import user_settings from 'user-settings'
 
+import common_util from './common_util.js'
+
 let settings = user_settings.file( '.atcutil' );
 
 program
@@ -32,15 +34,10 @@ if( !program.password )
 
 prompt.start();
 
-function get_url( contest, path )
-{
-    return 'http://' + contest + '.contest.atcoder.jp/' + path;
-}
-
 prompt.get( properties, (err,result) => {
     const username = program.user ? program.user : result.username;
     const password = program.password ? program.password : result.password;
-    client.fetch( get_url( 'practice', 'login' ), ( err, $, res ) => {
+    client.fetch( common_util.get_url( 'practice', 'login' ), ( err, $, res ) => {
         let form = $('form');
         form.field({
             'name' : username,

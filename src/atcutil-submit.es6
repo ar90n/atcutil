@@ -6,6 +6,9 @@ import client from 'cheerio-httpcli'
 import program from 'commander'
 import user_settings from 'user-settings'
 
+import './common_util.js'
+import common_util from './common_util.js'
+
 let settings = user_settings.file( '.atcutil' );
 
 program
@@ -25,11 +28,6 @@ const task = program.task ? program.task :
                             path.basename( cwd );
 const contest = program.contest ? program.contest :
                                   path.basename( path.dirname( cwd ) );
-
-function get_url( contest, path )
-{
-    return 'http://' + contest + '.contest.atcoder.jp/' + path;
-}
 
 function get_task_index( task )
 {
