@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "utility program for atcoder",
   "bin": {
-    "atcutil": "atcutil.js"
+    "atcutil": "./bin/atcutil.js"
   },
   "scripts": {
-    "build": "babel atcutil.es6.js -o atcutil.js && babel atcutil-fetch.es6.js -o atcutil-fetch.js && babel atcutil-test.es6.js -o atcutil-test.js && babel atcutil-submit.es6.js -o atcutil-submit.js && babel atcutil-login.es6.js -o atcutil-login.js ",
+    "build": "babel src -x .es6 -d bin",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
