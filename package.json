@@ -6,7 +6,7 @@
     "atcutil": "atcutil.js"
   },
   "scripts": {
-    "build": "babel atcutil.es6.js -o atcutil.js && babel atcutil-fetch.es6.js -o atcutil-fetch.js && babel atcutil-test.es6.js -o atcutil-test.js ",
+    "build": "babel atcutil.es6.js -o atcutil.js && babel atcutil-fetch.es6.js -o atcutil-fetch.js && babel atcutil-test.es6.js -o atcutil-test.js && babel atcutil-submit.es6.js -o atcutil-submit.js && babel atcutil-login.es6.js -o atcutil-login.js ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +21,9 @@
   "homepage": "https://github.com/ar90n/atcutil#readme",
   "dependencies": {
     "cheerio-httpcli": "^0.6.8",
-    "commander": "^2.9.0"
+    "commander": "^2.9.0",
+    "prompt": "^1.0.0",
+    "user-settings": "^0.1.5"
   },
   "devDependencies": {
     "babel-cli": "^6.8.0",

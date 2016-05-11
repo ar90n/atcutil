@@ -8,4 +8,5 @@ program
     .command('fetch [contest]', 'featch contest')
     .command('submit [file]', 'submit file')
     .command('test [exec]', 'test execution file')
+    .command('login', 'login')
     .parse(process.argv);
