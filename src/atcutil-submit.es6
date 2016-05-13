@@ -6,7 +6,6 @@ import client from 'cheerio-httpcli'
 import program from 'commander'
 import user_settings from 'user-settings'
 
-import './common_util.js'
 import common_util from './common_util.js'
 
 let settings = user_settings.file( '.atcutil' );
@@ -31,7 +30,7 @@ const contest = program.contest ? program.contest :
 
 function get_task_index( task )
 {
-    if( 1 < task.length )
+    if( 1 < task.indexOf('_') )
     {
         throw "invalid task";
     }
@@ -68,7 +67,7 @@ if(cookie)
 }
 
 fs.readFile( source_path, ( rd_err, rd_data ) => {
-    client.fetch( get_url( contest, 'submit' ), ( err, $, res ) => {
+    client.fetch( common_util.get_url( contest, 'submit' ), ( err, $, res ) => {
         const form = $('form');
         const task_index = get_task_index( task );
         const language_index = get_language_index( source_path );
@@ -83,7 +82,7 @@ fs.readFile( source_path, ( rd_err, rd_data ) => {
         form.field(field);
 
         form.find('button[type=submit]').click( ( err, $, res ) => {
-            const message = err ? 'Submit successful' : 'Submit failure';
+            const message = err ? 'Submit failure' : 'Submit successful';
             console.log( message );
         });
     });
