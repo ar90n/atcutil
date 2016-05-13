@@ -17,7 +17,8 @@ if( program.args.length != 1 )
     console.error('execution is required.');
     process.exit(1);
 }
-const execution_path = program.args[0];
+const execution_dir = path.isAbsolute( program.args[0] ) ? '' : './';
+const execution_path = execution_dir + program.args[0]
 
 const work_dir = program.directory ? program.directory : '.'
 const glob_pattern = path.join(work_dir, '?(in_*.txt|out_*.txt)')

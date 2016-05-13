@@ -20,7 +20,8 @@ if( program.args.length != 1 )
     console.error('source code is required.');
     process.exit(1);
 }
-const source_path = program.args[0];
+const execution_dir = path.isAbsolute( program.args[0] ) ? '' : './';
+const execution_path = execution_dir + program.args[0]
 
 const cwd = process.cwd();
 const task = program.task ? program.task :
