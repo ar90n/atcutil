@@ -54,7 +54,8 @@ function find_language_value( $, task_id, source_path )
         '.hs'   : /Haskell([^)]*)/,
         '.go'   : /GO([^)]*)/,
         '.cs'   : /C#([^)]*)/,
-        '.cpp'  : /C\+\+11(Clang\+\+ [0-9.]+)/
+        '.cpp'  : /C\+\+11(Clang\+\+ [0-9.]+)/,
+        '.fsx'  : /F#([^)]*)/,
     };
 
     if( !( ext in regex_table ) )
