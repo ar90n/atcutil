@@ -62,8 +62,12 @@ const g = new glob.Glob( glob_pattern, (err,result) => {
 
                     const command = execution_path;
                     const child = child_process.spawn( command );
+                    let stdout_str = "";
                     child.stdout.on( 'data', (data) => {
-                        const result = ( data.toString() === output_data.toString() ) ? 'OK' : 'FAILURE';
+                        stdout_str += data.toString();
+                    });
+                    child.stdout.on( 'end', (data) => {
+                        const result = ( stdout_str === output_data.toString() ) ? 'OK' : 'FAILURE';
                         const result_str = `${io_files[key]['in']} ... ${result}`;
                         console.log( result_str );
                     });
